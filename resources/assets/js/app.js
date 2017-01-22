@@ -12,8 +12,13 @@ require('./bootstrap');
  * the body of the page. From here, you may begin adding components to
  * the application, or feel free to tweak this setup for your needs.
  */
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-default/index.css';
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('elm', require('./components/Elm.vue'));
+
+Vue.use(ElementUI);
 
 const app = new Vue({
     el: '#app'
