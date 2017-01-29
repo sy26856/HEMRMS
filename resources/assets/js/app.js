@@ -16,7 +16,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 
 Vue.component('example', require('./components/Example.vue'));
-Vue.component('elm', require('./components/Elm.vue'));
+Vue.component('sex', require('./components/Sex.vue'));
+Vue.component('birth', require('./components/Birthday.vue'));
 
 Vue.use(ElementUI);
 

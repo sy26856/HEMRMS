@@ -1,0 +1,9 @@
+
+body{
+    background: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #20A0FF;
+    background-color: transparent;
+}

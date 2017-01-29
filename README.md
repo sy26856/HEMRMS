@@ -1,27 +1,60 @@
-# Laravel PHP Framework
+# 医院管理系统 (Laravel5.3 )
+> 实现病人从入院到出院一整套的就医流程,实现 医生,用户,管理员 多种用户权限
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+##环境配置
+> laravel5.3 + Vue2.0 + ELementUI
+>参考文档
+>[https://codesky.me/archives/try-laravel5-vue2-element-cn.wind](https://codesky.me/archives/try-laravel5-vue2-element-cn.wind)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+##运行
+ - `npm install` 安装扩展包
+ - `gulp watch` 监视文件变化自动执行
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+##数据库
+> **1.用户表**
+id,用户名,登录密码,身份证,手机号,性别,生日,住院费用充值
 
-## Official Documentation
+> **2.挂号表 **
+id,用户表id,生成的挂号id,诊断情况(门诊or住院),过期时间
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+> **3.医生表**
+id,医生姓名,身份证,登录密码,手机号,性别,医生等级,医生所处科室,入职时间(创建时间),医生详细情况介绍
 
-## Contributing
+> **4.科室表**
+id,科室名,科室主治医生id,科室介绍
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+> **5.项目表**
+id,项目名,项目介绍,项目主要负责人,项目费用
 
-## Security Vulnerabilities
+> **6.药物表**
+id,药物名,药物介绍,药物所属科室,药物的存储数量,单次药物价格
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+> **7.床位申请表**
+id,床位编号,床位所在位置,床位状态(空/不空),床位费用
 
-## License
+> **8.床位信息表**
+id,挂号id,床位id,开床位医生id,备注,状态(0已经还/1未还)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+> **9.门诊信息表**
+id,挂号id,科室id,医生id,检查项目id,项目结果,医生建议
+
+> **10.住院信息表**
+id,挂号id,科室id,医生id,检查项目id,项目结果,医生建议,名下剩余费用,床位信息表id,住院状态(仍在住院or出院),出院时间,出院负责人签字id
+
+
+> **11.取药信息表**
+id,挂号id,开药医生id,建议药物id,建议药物数量,取药医生id,取药数量
+
+> **12.就医费用表**
+id,挂号id,费用,是否付费
+
+> **13.费用充值表**
+id,用户id,收费医生id,费用充值
+
+> **14.添加药物id**
+id,药物id,加药医生id,添加药物数量
+
+
+
+# 教程资料
+1. 项目源码：[HEMRMS](https://github.com/zmj1368/HEMRMS)
