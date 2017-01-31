@@ -16,10 +16,10 @@ class CreateGetdrugsTable extends Migration
         Schema::create('getdrugs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('gdRID')->lenght(20)->unsigned()->unique()->comment('挂号id');
-            $table->integer('gddocID')->comment('开药医生id');
+            $table->string('gddocID')->comment('开药医生工号');
             $table->integer('gddrugID')->comment('建议药物id');
             $table->integer('gdsugnum')->comment('建议药物数量');
-            $table->integer('gdoperatorID')->comment('取药医生id');
+            $table->string('gdoperatorID')->comment('取药医生工号');
             $table->integer('gdnum')->comment('取药数量');
             $table->timestamps();
         });

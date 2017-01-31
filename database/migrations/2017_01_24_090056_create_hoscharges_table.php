@@ -16,7 +16,7 @@ class CreateHoschargesTable extends Migration
         Schema::create('hoscharges', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('hcuserID')->comment('用户id');
-            $table->integer('hcdocID')->comment('收费医生id');
+            $table->string('hcdocID')->comment('收费医生工号');
             $table->integer('hccost')->comment('费用充值');
             $table->timestamps();
         });

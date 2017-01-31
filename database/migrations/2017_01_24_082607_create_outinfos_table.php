@@ -17,7 +17,7 @@ class CreateOutinfosTable extends Migration
             $table->increments('id');
             $table->integer('outRID')->lenght(20)->unsigned()->unique()->comment('挂号id');
             $table->integer('outdepID')->unsigned()->comment('科室id');
-            $table->integer('outdocID')->unsigned()->comment('医生id');
+            $table->string('outdocID')->comment('医生工号');
             $table->integer('outproID')->unsigned()->comment('检查项目id');
             $table->text('outresult')->comment('项目结果');
             $table->text('outsuggest')->comment('医生建议');

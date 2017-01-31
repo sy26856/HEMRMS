@@ -16,7 +16,7 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('docname',20)->comment('医生姓名');
-            $table->string('docID',20)->comment('医生工号');
+            $table->string('docID',20)->unique()->comment('医生工号');
             $table->string('password',255)->comment('医生登陆密码');
             $table->char('docIDCard',18)->unique()->comment('医生身份证');
             $table->string('docphoneNum')->unique()->comment('医生手机号码');

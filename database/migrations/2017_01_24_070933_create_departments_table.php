@@ -16,7 +16,7 @@ class CreateDepartmentsTable extends Migration
         Schema::create('departments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('depname')->unique()->comment('科室名');
-            $table->integer('depdocID')->unsigned()->comment('科室主治医生id');
+            $table->string('depdocID')->comment('科室主治医生工号');
             $table->text('depinfo')->comment('科室介绍');
             $table->timestamps();
         });

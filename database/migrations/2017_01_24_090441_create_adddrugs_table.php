@@ -16,7 +16,7 @@ class CreateAdddrugsTable extends Migration
         Schema::create('adddrugs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('addrugID')->comment('药物id');
-            $table->integer('addocID')->comment('加药医生id');
+            $table->string('addocID')->comment('加药医生工号');
             $table->integer('adnum')->comment('添加药物数量');
             $table->timestamps();
         });

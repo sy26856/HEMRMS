@@ -54,3 +54,17 @@ Route::any('/test',function(){
 		]
 	];
 });
+
+/**
+ * 医生表接口
+ */
+Route::group(['prefix'=>'doc'],function() {
+	Route::any('/create','DoctorController@create');
+});
+
+/**
+ * 科室表接口
+ */
+Route::group(['prefix'=>'dep'],function() {
+	Route::any('/create','DepartmentController@create');
+});

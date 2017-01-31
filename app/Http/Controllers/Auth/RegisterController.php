@@ -56,6 +56,12 @@ class RegisterController extends Controller
             'IDCard'=>'required|unique:users',
             'password' => 'required|min:6|confirmed',
             'captcha' => 'required|captcha'
+        ],[
+
+        ],[
+            'name'=>'用户姓名',
+            'phoneNum'=>'电话号码',
+            'IDCard' => '身份证'
         ]);
     }
 

@@ -17,7 +17,7 @@ class CreateBedinfosTable extends Migration
             $table->increments('id');
             $table->integer('biRID')->lenght(20)->unsigned()->unique()->comment('生成的挂号号码');
             $table->integer('bibedID')->unsigned()->comment('床位id');
-            $table->integer('bidocID')->comment('开床位医生id');
+            $table->string('bidocID')->comment('开床位医生id');
             $table->text('biremark')->comment('备注');
             $table->smallInteger('bistatus')->comment('状态(0已经还/1未还)');
             $table->timestamps();
