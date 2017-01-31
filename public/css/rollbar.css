@@ -1,0 +1,15 @@
+.zUIpanelScrollBox,.zUIpanelScrollBar{
+    width:6px;
+    top:4px;
+    right:0px;
+    border-radius:5px;
+}
+.menu_box ul{font-size:14px;width:100%}
+.zUIpanelScrollBox{
+    background:#fff;opacity:0.8;
+    filter:alpha(opacity=10);
+}
+.zUIpanelScrollBar{
+    background:#228EE6;opacity:0.5;
+    filter:alpha(opacity=80);
+}

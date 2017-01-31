@@ -32,3 +32,25 @@ Route::get('/',function(){
  * 用户登陆接口
  */
 Route::any('/user/login','Auth\LoginController@index');
+
+/**
+ * 测试接口数据
+ */
+Route::any('/test',function(){
+	return [
+		[
+			'name'=>'zhangsan',
+			'sex' => 'male',
+			'age' => 32,
+			'address' => 'hfcjghfrdgfr',
+			'message' => 'he is a good guy'
+		],
+		[
+			'name'=>'lisi',
+			'sex' => 'feale',
+			'age' => 34,
+			'address' => 'fjd efr klk as ihiod',
+			'message' => 'she is a good girl'
+		]
+	];
+});
