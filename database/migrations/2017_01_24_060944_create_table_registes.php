@@ -16,7 +16,7 @@ class CreateTableRegistes extends Migration
         Schema::create('registes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('userId')->comment('用户表id');
-            $table->integer('registID')->lenght(20)->unsigned()->unique()->comment('生成的挂号号码');
+            $table->string('registID')->comment('生成的挂号号码');
             $table->smallInteger('diagnose')->comment('诊断情况(门诊0or住院1)');
             $table->timestamps();
         });

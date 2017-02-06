@@ -25,4 +25,23 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function inforead()
+    {
+        return view('home');
+    }
+    public function infoedit()
+    {
+        return view('home');
+    }
+
+    public function changepsw()
+    {
+        return view('home');
+    }
+
+    public function registes()
+    {
+        return view('home');
+    }
 }

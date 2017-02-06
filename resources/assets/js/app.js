@@ -28,11 +28,19 @@ import birth from './components/components/Birthday.vue';
 import logout from './components/components/Logout.vue';
 import userleftbar from './components/users/UserLeftBar.vue';
 
+import doclogout from './components/doctors/DocLogout.vue';
+import onebar from './components/doctors/OneBar.vue';
+import twobar from './components/doctors/TwoBar.vue';
+import threebar from './components/doctors/ThreeBar.vue';
+import fourbar from './components/doctors/FourBar.vue';
+import fivebar from './components/doctors/FiveBar.vue';
+
 Vue.use(ElementUI);
 Vue.use(VueRouter);
 
 const router=new VueRouter({
     mode: 'history', //切换路径模式，变成history模式
+    base: __dirname,
     routes
 });
 
@@ -45,5 +53,11 @@ const app = new Vue({
         sex,
         logout,
         userleftbar,
+        onebar,
+        twobar,
+        threebar,
+        fourbar,
+        fivebar,
+        doclogout
     }
 });

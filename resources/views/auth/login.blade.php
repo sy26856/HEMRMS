@@ -1,5 +1,36 @@
 @extends('layouts.app')
 
+@section('rightNavbar')
+    <ul class="nav navbar-nav navbar-right">
+        <!-- Authentication Links -->
+        @if (Auth::guest())
+            <li><a href="{{ url('/login') }}">用户登录</a></li>
+            <li><a href="{{ url('/register') }}">用户注册</a></li>
+            <li><a href="{{ url('/doclogin') }}">>>&nbsp;&nbsp;医生登录入口</a></li>
+        @else
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="{{ url('/logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            退出登录
+                        </a>
+
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        @endif
+    </ul>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">

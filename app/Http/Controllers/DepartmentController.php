@@ -13,9 +13,9 @@ class DepartmentController extends Controller
     {
         $data = $request->input();
         $data = [
-            'depname' => '急诊科 ',
-            'depdocID' => '2',
-            'depinfo' => '急诊',
+            'depname' => '骨科',
+            'depdocID' => '621701317880',
+            'depinfo' => '骨科',
         ];
 
         //validator类验证
