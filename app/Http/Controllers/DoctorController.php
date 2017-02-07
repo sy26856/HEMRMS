@@ -1,26 +1,62 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Department;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Validator;
 class DoctorController extends Controller
 {
+    //医生个人信息查询
+    public function inforead()
+    {
+        return $this->showview();
+    }
+
+    //医生个人信息修改
+    public function infoedit()
+    {
+        return $this->showview();
+    }
+
+    //医生修改登录密码
+    public function changepsw()
+    {
+        return $this->showview();
+    }
+
+    //过往就诊记录
+    public function passrecord()
+    {
+        return $this->showview();
+    }
+
+    //就诊信息录入
+    public function writerecord()
+    {
+        return $this->showview();
+    }
+
+    //判断是否登陆
     public function isLogin()
     {
-        //判断是否登陆
         if(session('doctor') == null || session('doctor')['docID'] == null){
             return 0;
         }else{
             return 1;
         }
     }
-    //医生首页面
-    public function index(){
+
+    public function showview()
+    {
         if($this->isLogin() == 0){
             return redirect('doclogin');
         }
         return view('doctor.home');
+    }
+    //医生首页面
+    public function index(){
+        return $this->showview();
     }
 
     //医生登陆
@@ -101,5 +137,18 @@ class DoctorController extends Controller
     {
         session()->forget('doctor');
         return redirect('doclogin');
+    }
+    
+    //获取医生所在的科室名
+    public function getDepartmentName(Request $request)
+    {
+        $departmentid = $request->input('departmentid');
+        if($departmentid !== null){
+            $dep = new Department();
+            $departmentres = $dep->findname($departmentid);
+            return $departmentres;
+        }else{
+            return ['status'=>0,'res'=>"没有相应参数"];
+        }
     }
 }

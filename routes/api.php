@@ -72,6 +72,7 @@ Route::group(['prefix'=>'user'],function(){
  */
 Route::group(['prefix'=>'doc'],function() {
 	Route::any('/create','DoctorController@create');
+	Route::any('/getDepartmentName','DoctorController@getDepartmentName');
 });
 
 /**

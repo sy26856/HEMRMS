@@ -18,4 +18,15 @@ class Department extends Model
             return ['status'=>0,'res'=>'department insert fail'];
         }
     }
+
+    //寻找科室名称
+    public function findname($id)
+    {
+        $dep = $this->find($id);
+        if($dep !== null){
+            return ['status'=>1,'res'=>"请求成功",'departmentName'=> $dep['depname']];
+        }else{
+            return ['status'=>0,'res'=>"没有相应科室名"];
+        }
+    }
 }

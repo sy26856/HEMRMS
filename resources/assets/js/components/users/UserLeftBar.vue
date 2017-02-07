@@ -19,7 +19,7 @@
         <li>
             <h3><i class="el-icon-view"></i><span>&nbsp;门诊信息</span></h3>
             <ul class="sub_menu">
-                <li><a href="add.html" target="main"><i class="el-icon-view"></i>&nbsp;需要检查的项目</a></li>
+                <li><a href="add.html" target="main"><i class="el-icon-view"></i>&nbsp;检查的项目</a></li>
                 <li><a href="add.html" target="main"><i class="el-icon-document"></i>&nbsp;检查项目结果</a></li>
             </ul>
         </li>
