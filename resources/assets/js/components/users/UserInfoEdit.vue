@@ -115,7 +115,7 @@
                 this.sex = this.user.sex;
             },
             open(msg) {
-                this.$alert(msg, '个人信息查询', {
+                this.$alert(msg, '个人信息修改', {
                     confirmButtonText: '确定',
                 });
             },
@@ -144,8 +144,10 @@
                         url: "/api/user/changeinfo"
                     }).then(function(res){
                         if(res.data.status == 1){
-                            // this.open('修改个人信息成功');
-                            location.reload();
+                            this.open('修改个人信息成功');
+                            setTimeout(function(){  
+                                window.location.reload();//页面刷新
+                            },2000);
                         }else{
                             this.open('修改个人信息失败');
                         }

@@ -13,7 +13,13 @@ class UserController extends Controller
     {
         $userid = $request->input('userid');
         $password = $request->input('password');
+        if($userid == null || $password == null){
+            return ['status'=>'0','res'=>'参数错误'];
+        }
         $user = User::find($userid);
+        if($user == null){
+            return ['status'=>'0','res'=>'无此用户,参数错误'];
+        };
         $userpsw = $user->password;
         //对密码进行验证
         if(\Hash::check($password,$userpsw)){
@@ -27,7 +33,13 @@ class UserController extends Controller
     {
         $userid = $request->input('userid');
         $password = $request->input('password');
+        if($userid == null || $password == null){
+            return ['status'=>'0','res'=>'参数错误'];
+        }
         $user = User::find($userid);
+        if($user == null){
+            return ['status'=>'0','res'=>'无此用户,参数错误'];
+        };
         $user->password = bcrypt($password);
         if($user->save()){
             return ['status'=>'1','res'=>'密码修改成功'];

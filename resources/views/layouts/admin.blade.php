@@ -34,7 +34,7 @@
                 <li>欢迎&nbsp;:&nbsp;{{ Auth::user()->name }}&nbsp;登录</li>
                 <li>
                     <router-link to="/user/changepsw">
-                        <el-button type="text">
+                        <el-button type="text" class="wtb">
                             修改密码
                         </el-button>
                     </router-link>
@@ -79,3 +79,7 @@ $("#leftbar").panel({iWheelStep:32});
 </script>
 <script src="{{asset('/js/zUI.js')}}"></script>
 <script type="text/javascript" src="{{asset('style/js/ch-ui.admin.js')}}"></script>
+<style type="text/css">
+    .wtb{color:#fff;}
+    .wtb:hover{color: #20A0FF;}
+</style>

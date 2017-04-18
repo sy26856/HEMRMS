@@ -1,5 +1,5 @@
 <template>
-    <el-button type="text" @click="confirm">
+    <el-button type="text" @click="confirm" class="wtb">
         退出登录
     </el-button>
 </template>

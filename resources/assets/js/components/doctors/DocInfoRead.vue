@@ -111,10 +111,9 @@
             },
             getDepartmentName(){
             	this.$http({
-                        params: {'departmentid': 2},
+                        params: {'departmentid': this.user['departmentID']},
                         url: "/api/doc/getDepartmentName"
                     }).then(function(res){
-                    	console.log(res.data)
                         if(res.data.status == 1){
                             this.department = res.data.departmentName;
                         }else{

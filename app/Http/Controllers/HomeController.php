@@ -44,4 +44,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function guahaoinfo()
+    {
+        return view('home');
+    }
 }

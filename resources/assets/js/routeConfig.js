@@ -7,9 +7,20 @@ import DocChangepsw from './components/doctors/DocChangepsw.vue';
 import DocInfoEdit from './components/doctors/DocInfoEdit.vue';
 import DocPassRecord from './components/doctors/DocPassRecord.vue';
 import DocWriteRecord from './components/doctors/DocWriteRecord.vue';
+import TodayRecord from './components/doctors/TodayRecord.vue';
+
+// 挂号信息查询模块
+import GuahaoInfo from './components/users/GuahaoInfo.vue';
+import UserProject from './components/users/UserProject.vue';
+
+// 医院基本信息
+import DocInfo from './components/doctorinfo/DocInfo.vue';
+import DepInfo from './components/doctorinfo/DepInfo.vue';
+import BedInfo from './components/doctorinfo/BedInfo.vue';
+import ProInfo from './components/doctorinfo/ProInfo.vue';
 
 
-import home from './components/users/Home.vue'
+import home from './components/users/Home.vue';
 
 export default [
     {
@@ -51,6 +62,40 @@ export default [
     {
         path: '/doc/writerecord',
         component:DocWriteRecord
+    },
+    {
+        path: '/doc/todayrecord',
+        component:TodayRecord
+    },
+    {
+        path: '/user/guahaoinfo',
+        component:GuahaoInfo
+    },
+    {
+        path: '/user/project',
+        component:UserProject
+    },
+    // 医院基本信息
+    {
+        path: '/doc/docinfo',
+        component:DocInfo
+    },
+    {
+        path: '/doc/depinfo',
+        component:DepInfo
+    },
+    {
+        path: '/doc/bedinfo',
+        component:BedInfo
+    },
+    {
+        path: '/doc/proinfo',
+        component:ProInfo
+    },
+    // 挂号信息
+    {
+        path: '/user/guahaoinfo',
+        component:GuahaoInfo
     },
     {
         path:'*',

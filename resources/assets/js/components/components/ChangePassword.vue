@@ -100,9 +100,9 @@
 									params: {'userid': this.user.id,'password':this.password},
 									url: "/api/user/changepsw"
 								}).then(function(res){
-									console.log(res.data.status);
 									if(res.data.status == 1){
-										this.open('修改密码成功');
+										this.open('修改密码成功,3秒后跳转到首页');
+										window.setTimeout("location.href='/home'",3000);
 									}else{
 										this.open('修改密码失败');
 									}

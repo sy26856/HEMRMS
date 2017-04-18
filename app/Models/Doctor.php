@@ -27,4 +27,22 @@ class Doctor extends Model
             return ['status'=>0,'res'=>'doctor insert fail'];
         }
     }
+
+    // 查询医生信息
+    public function selectAll()
+    {
+        $data = \DB::select('select d.*,de.depname from doctors d 
+left join departments de
+on d.departmentID = de.id ORDER BY id ASC ');
+        return $data;
+    }
+
+    public function findByName($name)
+    {
+        $name = "%".$name."%";
+        $data = \DB::select("select d.*,de.depname from doctors d 
+left join departments de
+on d.departmentID = de.id WHERE d.docname LIKE ?",[$name]);
+        return $data;
+    }
 }

@@ -19,40 +19,26 @@
                 <tr>
                     <th width="120">手机号:</th>
                     <td>
-                        <input type="text" class="disabledInput" name="phoneNum" v-model="phoneNum" > <span></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th width="120">用户名:</th>
-                    <td>
-                        <input type="text" name="name" v-model="name"> <span id="nameMsg" class="red" style="display:none"></span>
+                        <input type="text" name="phoneNum" v-model="docphoneNum" ><span id="phoneMsg" style="display:none"></span>
                     </td>
                 </tr>
                 <tr>
                     <th width="120">性别:</th>
                     <td>
                         <div>
-                            <el-radio class="radio" v-model="sex" label="m">男性
+                            <el-radio class="radio" v-model="docsex" label="m">男性
                             </el-radio>
-                            <el-radio class="radio" v-model="sex" label="f">
+                            <el-radio class="radio" v-model="docsex" label="f">
                                 女性
                             </el-radio>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <th width="120">生日:</th>
+                    <th width="120">医生详细情况:</th>
                     <td>
-                        <div class="block">
-                            <el-date-picker
-                                    v-model="birthday"
-                                    type="date"
-                                    placeholder="请选择日期"
-                                    name="birth"
-                            >
-                            </el-date-picker>
-                            <input type="hidden" v-model="birthday" id="birth" name="">
-                        </div>
+                        <el-input type="textarea" v-model="docinfo"></el-input>
+                         <span id="docinfoMsg" style="display:none"></span>
                     </td>
                 </tr>
                 <tr>
@@ -81,12 +67,6 @@
         margin-left: -10px;
         color: #fff;
     }
-    .disabledInput{
-        background-color: #eef1f6;
-        border-color: #d1dbe5;
-        color: #bbb;
-        cursor: not-allowed;
-    }
     .red{
         color: red;
     }
@@ -98,13 +78,61 @@
     export default{
         data() {
             return {
-                name:'',
-                phoneNum:'',
-                sex:'',
-                birthday:'',
-                birthdata:''
+                docphoneNum:'',
+                docsex:'',
+                docinfo:''
             }
         },
         props: ['user'],
+        methods:{
+            initData(){
+                this.docphoneNum = this.user['docphoneNum'];
+                this.docsex = this.user['docsex'];
+                this.docinfo = this.user['docinfo'];
+            },
+            open(msg) {
+                this.$alert(msg, '个人信息修改', {
+                    confirmButtonText: '确定',
+                });
+            },
+            submitData(){
+            	var flags = 0;
+            	var checkMobile = /^1\d{10}$/;
+            	if(this.docphoneNum === ''){
+			        $('#phoneMsg').text('电话号码不能为空');
+			        $('#phoneMsg').addClass('red').show();
+			    }else if(!checkMobile.test(this.docphoneNum)){
+			        $('#phoneMsg').text('电话号码格式不正确');
+			        $('#phoneMsg').addClass('red').show();
+			    }else{
+			        $('#phoneMsg').hide();
+			        flags += 1;
+			    }
+			    if (this.docinfo == '') {
+			    	$('#docinfoMsg').text('情况介绍不能为空');
+			        $('#docinfoMsg').addClass('red').show();
+			    }else{
+			    	$('#docinfoMsg').hide();
+			        flags += 1;
+			    }
+			    if (flags == 2) {
+			    	this.$http({
+                        params: {'userid': this.user['id'],'docphoneNum': this.docphoneNum,'docsex':this.docsex,'docinfo':this.docinfo},
+                        url: "/api/doc/changeinfo"
+                    }).then(function(res){
+                        if(res.data.status == 1){
+                            this.open('修改个人信息成功,请重新登陆查看修改结果');
+                        }else{
+                            this.open('修改个人信息失败');
+                        }
+                    }).catch(function(){
+                        alert("请求出错，请联系管理员")
+                    });
+			    }
+            }
+        },
+        mounted(){
+            this.initData();
+        }
     }
 </script>	

@@ -25,15 +25,24 @@ Route::group(['prefix'=>'user'],function(){
     Route::any('infoedit','HomeController@infoedit');
     Route::any('/changepsw','HomeController@changepsw');
     Route::any('/registes','HomeController@registes');
+    Route::any('/guahaoinfo','HomeController@guahaoinfo');
 });
 
 Route::group(['prefix'=>'doc'],function(){
     Route::any('/login','DoctorController@login');
     Route::any('/index','DoctorController@index');
+    Route::any('/index/info11','DoctorController@index');
     Route::any('/logout','DoctorController@logout');
     Route::any('/inforead','DoctorController@inforead');
     Route::any('/changepsw','DoctorController@changepsw');
     Route::any('/infoedit','DoctorController@infoedit');
-    Route::any('/passrecord','DoctorController@passrecord');
-    Route::any('/writerecord','DoctorController@writerecord');
+    Route::any('/passrecord','DoctorController@passRecord');
+    Route::any('/writerecord','DoctorController@writeRecord');
+    Route::any('/todayrecord','DoctorController@todayRecord');
+
+    // 医院基本信息
+    Route::any('/docinfo','DoctorInfoController@docinfo');
+    Route::any('/depinfo','DoctorInfoController@depinfo');
+    Route::any('/bedinfo','DoctorInfoController@bedinfo');
+    Route::any('/proinfo','DoctorInfoController@proinfo');
 });

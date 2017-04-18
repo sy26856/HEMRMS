@@ -52,4 +52,11 @@ class Registe extends Model
         return ['status'=>1,'regInnerID'=>$regInnerID,'regOutID'=>$regOutID];
 
     }
+    
+    // 查询所有的挂号
+    public function selectAll($uid)
+    {
+        $data = $this->where('userId',$uid)->orderBy('status', 'desc')->get();
+        return $data;
+    }
 }

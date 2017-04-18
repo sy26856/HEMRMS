@@ -14,20 +14,20 @@ class DepartmentController extends Controller
         $data = $request->input();
         $data = [
             'depname' => '骨科',
-            'depdocID' => '621701317880',
+            'depdepID' => '1',
             'depinfo' => '骨科',
         ];
 
         //validator类验证
         $validator = Validator::make($data, [
             'depname' => 'required',
-            'depdocID' => 'required',
+            'depdepID' => 'required',
             'depinfo' => 'required',
         ],[
 
         ],[
             'depname' => '科室名',
-            'depdocID' => '科室主治医生',
+            'depdepID' => '科室所属科室',
             'depinfo' => '科室介绍',
         ]);
         if($validator->fails()){
