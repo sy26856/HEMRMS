@@ -49,4 +49,29 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function project()
+    {
+        return view('home');
+    }
+
+    public function inproject()
+    {
+        return view('home');
+    }
+
+    public function inhos()
+    {
+        return view('home');
+    }
+
+    public function outhos()
+    {
+        return view('home');
+    }
+
+    public function passRecord()
+    {
+        return view('home');
+    }
 }

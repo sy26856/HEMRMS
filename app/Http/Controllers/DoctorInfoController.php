@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bed;
+use App\Models\Bedinfo;
 use App\Models\Doctor;
+use App\Models\Registe;
 use Illuminate\Http\Request;
 
 class DoctorInfoController extends Controller
@@ -75,5 +78,46 @@ class DoctorInfoController extends Controller
             $status = 0;
         }
         return ['status'=>$status,'data'=>$doctor];
+    }
+
+    // 获得患者姓名
+    public function getName(Request $request)
+    {
+        $regid = $request->input('regid');
+        $regModel = new Registe();
+        $data = $regModel
+            ->join('users','registes.userId','=','users.id')
+            ->where('registID',$regid)
+            ->select('users.name')
+            ->get();
+        if ($data){
+            $status = 1;
+        }else{
+            $status = 0;
+            $data = [];
+        }
+        return ['status'=>$status,'data'=>$data];
+    }
+
+    public function outHos(Request $request)
+    {
+        $regid = $request->input('regid');
+        $regModel = new Registe();
+        $bedModel = new Bed();
+        $bedinfoModel = new Bedinfo();
+
+        $reg = $regModel
+            ->where('registID','=',$regid)->update(['status'=>0]);
+        $bedidArr = $bedinfoModel->where('biRID','=',$regid)->select('bibedID')->get();
+        $bedid = $bedidArr[0]['bibedID'];
+        $bedinfo = $bedinfoModel->where('biRID','=',$regid)->update(['bistatus'=>0]);
+
+        $bed = $bedModel
+            ->where('id','=',$bedid)->update(['bedstatus'=>0]);
+        if($bed && $bedinfo && $reg) {
+            return ['status'=>1,'info'=>'更新数据成功'];
+        }else{
+            return ['status'=>0,'info'=>'更新数据失败'];
+        }
     }
 }

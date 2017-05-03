@@ -12,12 +12,22 @@ import TodayRecord from './components/doctors/TodayRecord.vue';
 // 挂号信息查询模块
 import GuahaoInfo from './components/users/GuahaoInfo.vue';
 import UserProject from './components/users/UserProject.vue';
+import UserInProject from './components/users/UserInProject.vue';
+import PassRecord from './components/users/PassRecord.vue';
 
 // 医院基本信息
 import DocInfo from './components/doctorinfo/DocInfo.vue';
 import DepInfo from './components/doctorinfo/DepInfo.vue';
 import BedInfo from './components/doctorinfo/BedInfo.vue';
 import ProInfo from './components/doctorinfo/ProInfo.vue';
+
+// 住院,出院
+import Inhos from './components/hosinfo/Inhos.vue';
+import Outhos from './components/hosinfo/Outhos.vue';
+import UserInhos from './components/hosinfo/UserInhos.vue';
+import UserOuthos from './components/hosinfo/UserOuthos.vue';
+
+import CheckPro from './components/doctors/CheckPro.vue';
 
 
 import home from './components/users/Home.vue';
@@ -75,6 +85,14 @@ export default [
         path: '/user/project',
         component:UserProject
     },
+    {
+        path: '/user/passRecord',
+        component:PassRecord
+    },
+    {
+        path: '/user/inproject',
+        component:UserInProject
+    },
     // 医院基本信息
     {
         path: '/doc/docinfo',
@@ -96,6 +114,27 @@ export default [
     {
         path: '/user/guahaoinfo',
         component:GuahaoInfo
+    },
+    {
+        path: '/doc/checkPro',
+        component:CheckPro
+    },
+    // 住院出院
+    {
+        path: '/doc/inhos',
+        component:Inhos
+    },
+    {
+        path: '/doc/outhos',
+        component:Outhos
+    },
+    {
+        path: '/user/inhos',
+        component:UserInhos
+    },
+    {
+        path: '/user/outhos',
+        component:UserOuthos
     },
     {
         path:'*',

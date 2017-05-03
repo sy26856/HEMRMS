@@ -39,6 +39,12 @@ class DoctorController extends Controller
         return $this->showview();
     }
 
+    // 检查项目
+    public function checkPro()
+    {
+        return $this->showview();
+    }
+
     public function todayRecord()
     {
         return $this->showview();
@@ -243,4 +249,6 @@ class DoctorController extends Controller
             return ['status' => '1', 'res' => '请求成功', 'user' => $user];
         }
     }
+
+
 }

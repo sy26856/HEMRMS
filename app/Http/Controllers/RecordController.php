@@ -29,6 +29,24 @@ class RecordController extends Controller
         }
     }
 
+    // 是否是住院id
+    public function checkHosReg(Request $request)
+    {
+        $model = new Registe();
+        $regid = $request->input('regid');
+
+        $res = $model
+            ->where('registID', '=',$regid)
+            ->where('status', '=',1)
+            ->where('diagnose','=',1)
+            ->get();
+        if(empty($res[0])){
+            return ['status' => '0', 'res' => '挂号id有误'];
+        }else{
+            return ['status' => '1', 'res' => '查询成功'];
+        }
+    }
+
     public function setInitData(Request $request)
     {
         $uid = $request->input('uid');
@@ -99,29 +117,94 @@ class RecordController extends Controller
     public function getTodayRecord(Request $request)
     {
         $uid = $request->input('uid');
-        $depid = $request->input('depid');
 
         $outInfoModel = new Outinfo();
-        $getDrugModel = new Getdrug();
 
-        $outData = $outInfoModel->where('outdocID',$uid)->orderBy('created_at','desc')->get();
-        $drugData = $getDrugModel->where('gddocID',$uid)->orderBy('created_at','desc')->get();
+        $outData = $outInfoModel
+            ->join('projects', 'outinfos.outproID', '=', 'projects.id')
+            ->join('registes','outinfos.outRID','=','registes.registID')
+            ->join('users','registes.userId','=','users.id')
+            ->where('outdocID',$uid)
+            ->orderBy('created_at','desc')
+            ->select('outinfos.*','projects.proname','users.name')
+            ->get();
 
-        $data = [];
-        $proIDs = [];
-        $drugIDs = [];
-        foreach ($outData as $ok => $ov){
-            if (!array_key_exists($ov['outRID'],$data)){
-                $data[$ov['outRID']] = [];
-                $data[$ov['outRID']]['outsuggest'] = $ov['outsuggest'];
-                $data[$ov['outRID']]['created_at'] = $ov['created_at'];
+        foreach ($outData as $k=>$v){
+            if($v['outprodocID'] == 0){
+                $outData[$k]['checkType'] = '未检查';
+            }else{
+                $outData[$k]['checkType'] = '已检查';
             }
-            array_push($proIDs,$ov['outproID']);
         }
-        foreach ($drugData as $dk => $dv){
-            array_push($proIDs,$ov['gddrugID']);
+        return ['status' => '1', 'res' => '查询成功','data'=>$outData];
+    }
+
+    // 检查项目
+    public function checkPro(Request $request)
+    {
+        $uid = $request->input('uid');
+        $depid = $request->input('depid');
+        $regid = $request->input('regid');
+
+        $outInfoModel = new Outinfo();
+        $outData = $outInfoModel
+            ->join('projects', 'outinfos.outproID', '=', 'projects.id')
+            ->join('registes','outinfos.outRID','=','registes.registID')
+            ->join('users','registes.userId','=','users.id')
+            ->where('outdepID',$depid)
+            ->where('outRID',$regid)
+            ->orderBy('created_at','desc')
+            ->select('outinfos.*','projects.proname','users.name')
+            ->get();
+        if($outData){
+            return ['status' => '1', 'res' => '查询成功','data'=>$outData];
+        }else{
+            return ['status' => '0', 'res' => '查询失败','data'=>''];
+        }
+    }
+
+    public function resCheck(Request $request)
+    {
+        $uid = $request->input('uid');
+        $id = $request->input('id');
+        $regid = $request->input('regid');
+        $drugs = $request->input('drugs');
+        $res = $request->input('res');
+        $outInfoModel = new Outinfo();
+
+        $flag = 1;
+        foreach ($drugs as $k=>$v){
+            $getDrug = new Getdrug();
+            $getDrug->gdRID = $regid;
+            $getDrug->gddocID = $uid;
+            $getDrug->gdsugnum = 1;
+            $getDrug->gdoperatorID = 0;
+            $getDrug->gdnum = 0;
+            $getDrug->gddrugID = $v;
+            if (!$getDrug->save()){
+                $flag = 0;
+            }
         }
 
-        return ['status' => '1', 'res' => '查询成功','data'=>$data];
+        $outData = $outInfoModel->find($id);
+        $outData->outresult = $res;
+        $outData->outprodocID = $uid;
+        if($outData->save()){
+            return ['status' => '1', 'res' => '更新成功'];
+        }else{
+            return ['status' => '0', 'res' => '更新失败'];
+        }
+    }
+
+    public function readPro(Request $request)
+    {
+        $id = $request->input('id');
+        $outInfoModel = new Outinfo();
+        $outData = $outInfoModel->where('id','=',$id)->select('outresult')->get();
+        if($outData){
+            return ['status' => '1', 'res' => '查询成功','data' => $outData[0]];
+        }else{
+            return ['status' => '0', 'res' => '查询失败','data' => ''];
+        }
     }
 }

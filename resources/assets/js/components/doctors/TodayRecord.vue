@@ -20,15 +20,15 @@
 		    style="width: 100%">
 		    <el-table-column type="expand">
 		      <template scope="props">
-		        <p>医生建议: {{ props.row.suggest }}</p>
-		        <p>就诊时间: {{ props.row.data }}</p>
-		        <p>药物: {{ props.row.drugs }}</p>
-		        <p>检查项目: {{ props.row.pros }}</p>
+		        <p>医生建议: {{ props.row.outsuggest }}</p>
+		        <p>就诊时间: {{ props.row.created_at }}</p>
+		        <p>检查项目: {{ props.row.proname }}</p>
+		        <p>项目状态: {{ props.row.checkType }}</p>
 		      </template>
 		    </el-table-column>
 		    <el-table-column
 		      label="挂号"
-		      prop="regid">
+		      prop="outRID">
 		    </el-table-column>
 		    <el-table-column
 		      label="患者姓名"
@@ -39,34 +39,16 @@
 	</div>
 </template>
 <style scoped>
-	
+	#TodayRecord{
+		height:100%;
+		overflow-y: auto;
+	}
 </style>
 <script>
     export default{
         data() {
             return {
-            	tableData: [{
-			          date: '2017-04-17 21:25:38',
-			          name: '刘二三',
-			          suggest: '测试数据1',
-			          pros: '急诊项目1,急诊项目3,急诊项目4',
-			          drugs: '急诊药物1,急诊药物2,急诊药物3,急诊药物5',
-			          regid: '069654829300170416',
-			        }, {
-			          date: '2017-04-17 21:25:38',
-			          name: '张三',
-			          suggest: '测试数据2',
-			          pros: '急诊项目1,急诊项目2,急诊项目4',
-			          drugs: '急诊药物4,急诊药物5',
-			          regid: '069654829300170417',
-			        },  {
-			          date: '2017-04-17 21:25:38',
-			          name: '李四',
-			          suggest: '测试数据3',
-			          pros: '急诊项目3,急诊项目5',
-			          drugs: '急诊药物1,急诊药物2',
-			          regid: '069654829300170419',
-			        }]
+            	tableData: [],
             }
         },
         props: ['user'],
@@ -77,18 +59,18 @@
                 });
             },
             initData(){
-            	// this.$http({
-             //        params: {'uid': this.user['id'],'depid': this.user['departmentID']},
-             //        url: "/api/doc/getTodayRecord"
-             //    }).then(function(res){
-             //        if(res.data.status == 1){
-             //            this.tableData = res.data.data;
-             //        }else{
-             //            this.open('修改个人信息失败');
-             //        }
-             //    }).catch(function(){
-             //        alert("请求出错，请联系管理员")
-             //    });
+            	this.$http({
+                    params: {'uid': this.user['id']},
+                    url: "/api/doc/getTodayRecord"
+                }).then(function(res){
+                    if(res.data.status == 1){
+                        this.tableData = res.data.data;
+                    }else{
+                        this.open('修改个人信息失败');
+                    }
+                }).catch(function(){
+                    alert("请求出错，请联系管理员")
+                });
             }
         },
         mounted(){

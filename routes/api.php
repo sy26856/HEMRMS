@@ -65,6 +65,16 @@ Route::group(['prefix'=>'user'],function(){
 	Route::any('/checkRegID','UserController@checkRegID');
 
 	Route::any('/getguahaoinfo','RegController@GetRegInfo');
+	Route::any('/checkOutPro','ApiUserController@checkOutPro');
+
+	Route::any('/checkOutReg','ApiUserController@checkOutReg');
+	Route::any('/checkInReg','ApiUserController@checkInReg');
+
+	Route::any('/readOutPro','ApiUserController@readOutPro');
+	Route::any('/readInPro','ApiUserController@readInPro');
+	Route::any('/checkBed','ApiUserController@checkBed');
+	
+	Route::any('/passRecord','ApiUserController@passRecord');
 });
 
 
@@ -81,17 +91,24 @@ Route::group(['prefix'=>'doc'],function() {
 	Route::any('/getUser','DoctorController@getUser');
 
 	// 就诊 
+	Route::any('/checkHosReg','RecordController@checkHosReg');
 	Route::any('/checkReg','RecordController@checkReg');
 	Route::any('/setinitdata','RecordController@setInitData');
 	Route::any('/writeRecord','RecordController@writeRecord');
 	Route::any('/getTodayRecord','RecordController@getTodayRecord');
+	Route::any('/checkPro','RecordController@checkPro');
+	Route::any('/readPro','RecordController@readPro');
+	Route::any('/resCheck','RecordController@resCheck');
 
 	// 医院基本信息
 	Route::any('/getdocinfo','DoctorInfoController@getDocInfo');
 	Route::any('/getonedocinfo','DoctorInfoController@getOneDocInfo');
 	/*Route::any('/getUser','DoctorInfoController@getUser');
-	Route::any('/getUser','DoctorInfoController@getUser');
-	Route::any('/getUser','DoctorInfoController@getUser');*/
+	*/
+
+	// 获得患者姓名
+	Route::any('/getName','DoctorInfoController@getName');
+	Route::any('/outHos','DoctorInfoController@outHos');
 });
 
 /**
@@ -100,4 +117,13 @@ Route::group(['prefix'=>'doc'],function() {
  */
 Route::group(['prefix'=>'dep'],function() {
 	Route::any('/create','DepartmentController@create');
+});
+
+/**
+ * 科室表接口
+ * 1.创建科室
+ */
+ Route::group(['prefix'=>'bed'],function() {
+	Route::any('/bedSpare','ApiBedController@bedSpare');
+	Route::any('/addInfo','ApiBedController@addInfo');
 });
